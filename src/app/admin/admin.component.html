@@ -1,3 +1,37 @@
-<p>
-  admin works!
-</p>
+<div class="container">
+    <table id="myTable" class=" table order-list">
+    <thead>
+        <tr>
+            <td style="display:none;">id</td>
+            <td>Assigned To</td>
+            <td>Task Name</td>
+            <td>Description</td>
+            <td>status</td>
+            <td>Deadline</td>
+            <td>Created</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks">
+            <td class="col-md-1" style="display:none;">{{task.id}}</td>
+            <td class="col-md-1">{{task.assigned_to.full_name}}</td>
+            <td class="col-md-1">{{task.name}}</td>
+            <td class="col-md-1">{{task.description}}</td>
+            <td class="col-md-1">{{task.status}}</td>
+            <td class="col-md-1">{{task.deadline}}</td>
+            <td class="col-md-1">{{task.created}}</td>
+            <td class="col-md-1"><button (click)="onDeleteTask(task.id)">Delete Task</button></td>
+            <td class="col-md-1"><button (click)="onEditTask()">Edit Task</button></td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5" style="text-align: left;">
+                <button class="btn btn-lg btn-block " (click)="onAddTask()">Add Row</button>
+            </td>
+        </tr>
+        <tr>
+        </tr>
+    </tfoot>
+</table>
+</div>

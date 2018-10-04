@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from './auth.service';
-import { Subscriber } from 'rxjs';
+import { MessageService } from './message.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -10,36 +9,32 @@ import { Subscriber } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'task-management';
-  loginForm: FormGroup;
+  title = 'Task Management';
+  // subscription: Subscription;
+  logged: string = localStorage.getItem('logged')?localStorage.getItem('logged'):"False";
+  adminUser: string = localStorage.getItem('adminUser')?localStorage.getItem('adminUser'):"False";
   
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
-
+  constructor(private router: Router, private messageService: MessageService) { 
+    // this.subscription = this.messageService.getLocalStorage().subscribe(localData => {
+    //   this.logged = localData.logged;
+    //   this.adminUser = localData.adminUser;
+    // })
+  
   }
-  
+
   ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]  
-    });
+    if (this.logged == "True") {
+      if(this.adminUser == "True") {
+        this.router.navigate(['admin']);
+      }
+      else {
+        this.router.navigate(['user']);
+      }
+    }
+    else {
+      this.router.navigate(['login']);
+    }
   }
 
-  loginSubmit() {
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password)
-      .subscribe(logindetails => {
-        if (this.loginForm.value.email == 'rajansingh.uiet@yahoo.com') {
-          localStorage.setItem('adminUser', 'True');
-          localStorage.setItem('logged', 'True');
-          this.router.navigate(['admin']);
-
-        }
-        else {
-          localStorage.setItem('adminUser', 'False')
-          localStorage.setItem('logged', 'True');
-          this.router.navigate(['user']);
-        }
-      });
-    
-  }
-  
 }
+  

@@ -1,21 +1,12 @@
-<div class="container">
-  <h1 class="form-heading">login Form</h1>
-  <div class="login-form">
-    <div class="main-div">
-        <div class="panel">
-          <p>Please enter your email and password</p>
-        </div>
-        <form id="Login" [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
-    
-            <div class="form-group"> 
-                <input type="email" class="form-control" formControlName="email" id="email" placeholder="Email Address" name="email">  
-            </div>  
-            <div class="form-group">  
-                <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" name="password">  
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-    
-        </form>
-    </div>
+<!-- <div *ngIf="logged == 'True'; else login ">
+  <div *ngIf="adminUser == 'True'; else user ">
+    <app-admin></app-admin>
   </div>
+  <ng-template #user>
+    <app-users></app-users>
+  </ng-template>
 </div>
+<ng-template #login>  
+  <app-login></app-login>
+</ng-template> -->
+<router-outlet></router-outlet> 

@@ -9,6 +9,8 @@ import { AdminComponent } from './admin/admin.component';
 import { UsersComponent } from './users/users.component';
 import { TaskStatisticsComponent } from './task-statistics/task-statistics.component';
 import { LoginComponent } from './login/login.component';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { LoginComponent } from './login/login.component';
     AdminComponent,
     UsersComponent,
     TaskStatisticsComponent,
-    LoginComponent
+    LoginComponent,
+    AddTaskComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
