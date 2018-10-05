@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit {
   //   status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=0)
   //   deadline = models.DateField()
   //   created = models.DateTimeField(auto_now_add=True)
-  constructor(private formBuilder: FormBuilder, private taskService: TaskService) { }
+  constructor(private formBuilder: FormBuilder, private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
     this.taskService.getTasks().subscribe((tasks:Task[]) => {
@@ -31,11 +31,21 @@ export class AdminComponent implements OnInit {
   }
 
   onDeleteTask(id:number): void {
-    this.taskService.deleteTask(id).subscribe();
+    this.taskService.retrieveDeleteTask(id.toString(), 'delete').subscribe();
     this.tasks = this.tasks.filter(Task => Task.id != id)
   }
-  onAddTask() {
 
+  onEditTask(id:number): void {
+    localStorage.setItem('adminEditTaskId', id.toString());
+    this.router.navigate(['edit-task']);
+  }
+
+  onAddTask() {
+    this.router.navigate(['add-task']);
+
+  }
+  getTaskStatistics() {
+    this.router.navigate(['statistics']);
   }
 
 }

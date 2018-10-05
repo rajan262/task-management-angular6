@@ -21,13 +21,16 @@
             <td class="col-md-1">{{task.deadline}}</td>
             <td class="col-md-1">{{task.created}}</td>
             <td class="col-md-1"><button (click)="onDeleteTask(task.id)">Delete Task</button></td>
-            <td class="col-md-1"><button (click)="onEditTask()">Edit Task</button></td>
+            <td class="col-md-1"><button (click)="onEditTask(task.id)">Edit Task</button></td>
         </tr>
     </tbody>
     <tfoot>
         <tr>
             <td colspan="5" style="text-align: left;">
-                <button class="btn btn-lg btn-block " (click)="onAddTask()">Add Row</button>
+                <button class="btn btn-lg btn-block " (click)="onAddTask()">Add New Task</button>
+            </td>
+            <td *ngIf="tasks.length > 0" colspan="5" style="text-align: right;">
+                    <button class="btn btn-lg btn-block " (click)="getTaskStatistics()">Check task statistics</button>
             </td>
         </tr>
         <tr>

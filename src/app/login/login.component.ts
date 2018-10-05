@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         else {
           localStorage.setItem('adminUser', 'False')
           localStorage.setItem('logged', 'True');
+          localStorage.setItem('user_id', logindetails.id.toString());
           this.messageService.updateLocalStorage('False', 'True');
           this.router.navigate(['user']);
         }

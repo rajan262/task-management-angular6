@@ -1,3 +1,29 @@
-<p>
-  edit-task works!
-</p>
+<div class="container">
+  <div class="col-md-5">
+    <div class="form-area">
+      <form [formGroup]="editTaskForm" (ngSubmit)="adminEditTaskSubmit()">
+        <br>
+        <h3 style="margin-bottom: 25px; text-align: center;">Edit task</h3>
+        <div *ngIf="adminUser" formGroupName="assigned_to">
+          <select class="form-group" formControlName="id">
+            <option *ngFor="let user of userList" value={{user.id}}>{{user.full_name}}</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <input [readonly]="!adminUser" type="text" class="form-control" id="name" name="name" placeholder="Name" formControlName="name">
+        </div>
+        <div class="form-group">
+          <input [readonly]="!adminUser" type="text" class="form-control" id="description" name="description" placeholder="description" formControlName="description">
+        </div>
+        <select class="form-group" formControlName="status">
+          <option *ngFor="let status of statusList" value={{status.id}}>{{status.text}}</option>
+        </select>
+        <div class="form-group">
+          <input [readonly]="!adminUser" type="text" class="form-control" id="deadline" name="deadline" placeholder="deadline" formControlName="deadline">
+        </div>
+
+        <button type="submit" class="btn btn-primary pull-right">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
