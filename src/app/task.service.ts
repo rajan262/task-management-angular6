@@ -50,4 +50,9 @@ export class TaskService {
     return this.http.get(url, apiHeaders);
   }
 
+  getUserTaskStatistics() {
+    let url = this.ApiBaseUrl + '/tasks/user-task-statistics';
+    return this.http.get(url, apiHeaders);
+  }
+
 }

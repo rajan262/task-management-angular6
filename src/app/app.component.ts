@@ -35,6 +35,13 @@ export class AppComponent implements OnInit{
       this.router.navigate(['login']);
     }
   }
+  logout() {
+    console.log('Logging out');
+    localStorage.setItem('logged', "False");
+    this.logged = "False";
+    this.router.navigate(['']);
+   
+  }
 
 }
   

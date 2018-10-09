@@ -1,5 +1,35 @@
-<p>Total tasks: {{taskStatistics.total_tasks}}</p>
-<p>Total tasks: {{taskStatistics.todo_tasks_percent}}</p>
-<p>Total tasks: {{taskStatistics.in_progress_tasks_percent}}</p>
-<p>Total tasks: {{taskStatistics.done_tasks_percent}}</p>
-<p>Total tasks: {{taskStatistics.completed_tasks_percent}}</p>
+<div class="container">
+    <table id="myTable" class=" table order-list">
+    <thead>
+        <tr>
+            <td>Member Name</td>
+            <td>Total Tasks Assigned</td>
+            <td>Tasks to Do</td>
+            <td>Tasks in Progress</td>
+            <td>Tasks Done</td>
+            <td>Tasks Completed</td>
+        </tr>
+    </thead>
+    <tbody>
+    <br><br>
+        <tr *ngFor="let data of userTaskStatistics">            
+            <td class="col-md-2">{{data.assigned_to | taskCount}}</td>
+            <td class="col-md-2">{{data.total_tasks_assigned | taskCount}}</td>
+            <td class="col-md-2">{{data.tasks_to_do | taskCount}}</td>
+            <td class="col-md-2">{{data.tasks_in_progress | taskCount}}</td>
+            <td class="col-md-2">{{data.tasks_done | taskCount}}</td>
+            <td class="col-md-2">{{data.tasks_completed | taskCount}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="col-md-2"><p>Total</p></td>
+            <td class="col-md-2"><p>{{taskStatistics.total_tasks | taskCount}}</p></td>
+            <td class="col-md-2"><p>{{taskStatistics.todo_tasks_percent | taskCount}}%</p></td>
+            <td class="col-md-2"><p>{{taskStatistics.in_progress_tasks_percent | taskCount}}%</p></td>
+            <td class="col-md-2"><p>{{taskStatistics.done_tasks_percent | taskCount}}%</p></td>
+            <td class="col-md-2"><p>{{taskStatistics.completed_tasks_percent | taskCount}}%</p></td>
+        </tr>
+    </tfoot>
+</table>
+</div>

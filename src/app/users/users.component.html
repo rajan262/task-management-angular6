@@ -17,10 +17,10 @@
             <td class="col-md-1">{{task.assigned_to.full_name}}</td>
             <td class="col-md-1">{{task.name}}</td>
             <td class="col-md-1">{{task.description}}</td>
-            <td class="col-md-1">{{task.status}}</td>
+            <td class="col-md-1">{{task.status | statusTransform}}</td>
             <td class="col-md-1">{{task.deadline}}</td>
-            <td class="col-md-1">{{task.created}}</td>
-            <td class="col-md-1"><button (click)="onUserEditTask(task.id)">Edit Task</button></td>
+            <td class="col-md-1">{{task.created | dateTransform}}</td>
+            <td class="col-md-1"><button (click)="onUserEditTask(task.id)" appHighlight>Edit Task</button></td>
         </tr>
     </tbody>
 </table>
