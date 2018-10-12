@@ -29,6 +29,8 @@ import { TaskDashboardComponent } from './task-dashboard/task-dashboard.componen
 import { TaskTableComponent } from './task-table/task-table.component';
 import { TaskToolbarComponent } from './task-toolbar/task-toolbar.component';
 import { AddTeamComponent } from './add-team/add-team.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -77,6 +79,7 @@ import { AddTeamComponent } from './add-team/add-team.component';
     MatSelectModule,
     MatOptionModule,
     MatSlideToggleModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [],
   bootstrap: [AppComponent]
