@@ -47,7 +47,12 @@ export class AddTaskComponent implements OnInit {
   }
 
   onTeamSelect(teamId: number) {
-    this.userList = this.teams.filter(Team => Team.id==teamId)[0].members;
+    if (teamId) {
+      this.userList = this.teams.filter(Team => Team.id==teamId)[0].members;
+      this.addTaskForm.patchValue({
+        'assigned_to': ''
+      });
+    }
   }
 
   onAddTaskSubmit() {

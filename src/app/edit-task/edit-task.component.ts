@@ -47,7 +47,7 @@ export class EditTaskComponent implements OnInit {
         'id': ['', Validators.required],
         'email': [''],
         'full_name': ['']
-      }),
+      }, {validators: [Validators.required]}),
       'description': [''],
       'status': ['', Validators.required],
       'deadline': [{value: '', disabled: !this.adminUser}, Validators.required],
@@ -62,7 +62,6 @@ export class EditTaskComponent implements OnInit {
     let editTaskId = this.adminUser?localStorage.getItem('adminEditTaskId'):localStorage.getItem('userEditTaskId')
     this.taskService.retrieveDeleteTask(editTaskId, 'retrieve').subscribe((task:Task) => {
       this.editTaskForm.setValue(task);
-      console.log(task);
     })
 
     this.authService.listUsers().subscribe((users:User[]) => {
@@ -76,7 +75,10 @@ export class EditTaskComponent implements OnInit {
   }
 
   onTeamSelect(teamId: number) {
+    if (teamId) {
     this.userList = this.teams.filter(Team => Team.id==teamId)[0].members;
+    this.editTaskForm.controls.assigned_to.reset();
+  }
   }
     
 

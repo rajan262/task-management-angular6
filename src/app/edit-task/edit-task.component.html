@@ -51,7 +51,7 @@
               <td>            
                     <div *ngIf="adminUser" formGroupName="assigned_to">
                         <mat-form-field class="demo-full-width">
-                          <mat-select class="form-group" formControlName="id">
+                          <mat-select class="form-group" formControlName="id" placeholder="Select A Member">
                             <mat-option>-- Select Any User --</mat-option>
                             <mat-option *ngFor="let user of userList" [value]="user.id">{{user.full_name}}</mat-option>
                           </mat-select>                
