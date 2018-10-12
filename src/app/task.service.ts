@@ -34,6 +34,16 @@ export class TaskService {
     }
   }
 
+  listTeams() {
+    let url = this.ApiBaseUrl + '/tasks/team-list/';
+    return this.http.get(url, apiHeaders);
+  } 
+
+  addTeam(teamData:any) {
+    let url = this.ApiBaseUrl + '/tasks/add-team/';
+    return this.http.post(url, teamData, apiHeaders);
+  }
+
   createTask(taskData:any) {
     let url = this.ApiBaseUrl + '/tasks/create-task/';
     return this.http.post(url, taskData, apiHeaders);

@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <table id="myTable" class=" table order-list">
     <thead>
         <tr>
@@ -32,4 +32,77 @@
         </tr>
     </tfoot>
 </table>
+<br><br>
+<label>This is admin comment: {{taskStatisticsComment}}</label><br>
+<input type="text" [(ngModel)]="taskStatisticsComment">
+</div> -->
+
+<div>
+        <mat-table [dataSource]="taskStatistics">
+          <ng-container matColumnDef="total_tasks">
+            <mat-header-cell *matHeaderCellDef> Total task assigned </mat-header-cell>
+            <mat-cell *matCellDef="let statistics"> {{statistics.total_tasks | taskCount}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="todo_tasks_percent">
+            <mat-header-cell *matHeaderCellDef> Percentage of Tasks to Do </mat-header-cell>
+            <mat-cell *matCellDef="let statistics"> {{statistics.todo_tasks_percent | taskCount}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="in_progress_tasks_percent">
+            <mat-header-cell *matHeaderCellDef> Percentage of Tasks in progress </mat-header-cell>
+            <mat-cell *matCellDef="let statistics"> {{statistics.in_progress_tasks_percent | taskCount}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="done_tasks_percent">
+            <mat-header-cell *matHeaderCellDef> Percentage of Tasks Done </mat-header-cell>
+            <mat-cell *matCellDef="let statistics"> {{statistics.done_tasks_percent | taskCount}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="completed_tasks_percent">
+                <mat-header-cell *matHeaderCellDef> Percentage of Tasks Completed </mat-header-cell>
+                <mat-cell *matCellDef="let statistics"> {{statistics.completed_tasks_percent | taskCount}} </mat-cell>
+           </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>
+<br><br>
+<div>
+  <label>This is admin comment: {{taskStatisticsComment}}</label><br>
+  <input type="text" [(ngModel)]="taskStatisticsComment">
 </div>
+
+<br><br>
+
+      <div>
+            <mat-table [dataSource]="userTaskStatistics">
+              <ng-container matColumnDef="assigned_to">
+                <mat-header-cell *matHeaderCellDef> Member Name </mat-header-cell>
+                <mat-cell *matCellDef="let user"> {{user.assigned_to}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="total_tasks_assigned">
+                <mat-header-cell *matHeaderCellDef> Total Tasks Assigned </mat-header-cell>
+                <mat-cell *matCellDef="let user"> {{user.total_tasks_assigned | taskCount}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="tasks_to_do">
+                <mat-header-cell *matHeaderCellDef> Total Tasks To Do </mat-header-cell>
+                <mat-cell *matCellDef="let user"> {{user.tasks_to_do | taskCount}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="tasks_in_progress">
+                <mat-header-cell *matHeaderCellDef> Total Tasks In-Progress </mat-header-cell>
+                <mat-cell *matCellDef="let user"> {{user.tasks_in_progress | taskCount}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="tasks_done">
+                    <mat-header-cell *matHeaderCellDef> Total Tasks Done </mat-header-cell>
+                    <mat-cell *matCellDef="let user"> {{user.tasks_done  | taskCount}} </mat-cell>
+               </ng-container>
+               <ng-container matColumnDef="tasks_completed">
+                  <mat-header-cell *matHeaderCellDef> Total Tasks Completed </mat-header-cell>
+                  <mat-cell *matCellDef="let user"> {{user.tasks_completed  | taskCount}} </mat-cell>
+             </ng-container>
+
+    
+              <mat-header-row *matHeaderRowDef="userDisplayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: userDisplayedColumns;"></mat-row>
+            </mat-table>
+          </div>
+
+

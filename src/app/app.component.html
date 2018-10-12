@@ -1,3 +1,2 @@
-<app-task-toolbar></app-task-toolbar>
-<button *ngIf="logged == 'True'" style="margin-left: 1200px;" (click)="logout()">logout</button>
+<app-task-toolbar [logged]=logged [adminUser]=adminUser></app-task-toolbar>
 <router-outlet></router-outlet> 

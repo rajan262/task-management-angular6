@@ -1,27 +1,75 @@
-<div class="container">
-    <div class="col-md-5">
-      <div class="form-area">
+<mat-card>
+    <mat-card-title>Add Task Form</mat-card-title>
+    <mat-card-content>
         <form [formGroup]="addTaskForm" (ngSubmit)="onAddTaskSubmit()">
-          <br>
-          <h3 style="margin-bottom: 25px; text-align: center;">Add task</h3>
-            <select class="form-group" formControlName="assigned_to">
-              <option *ngFor="let user of userList" value={{user.id}}>{{user.full_name}}</option>
-            </select>
-          <div class="form-group">
-            <input type="text" class="form-control" id="name" name="name" placeholder="Name" formControlName="name">
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="description" name="description" placeholder="description" formControlName="description">
-          </div>
-          <select class="form-group" formControlName="status">
-            <option disabled *ngFor="let status of statusList" value={{status.id}}>{{status.text}}</option>
-          </select>
-          <div class="form-group">
-            <input type="text" class="form-control" id="deadline" name="deadline" placeholder="deadline" formControlName="deadline">
-          </div>
+        <table>  
+          <tr>
+            <td colspan="2">
+              <mat-form-field class="demo-full-width">
+                  <input matInput type="text" class="form-control" id="name" name="name" placeholder="Name" formControlName="name">
+              </mat-form-field>
+            </td>
+          </tr>
   
-          <button type="submit" class="btn btn-primary pull-right">Submit</button>
-        </form>
-      </div>
-    </div>
-  </div>
+          <tr>
+            <td colspan="2">
+              <mat-form-field class="demo-full-width">
+                <input matInput type="text" class="form-control" id="description" name="description" placeholder="description" formControlName="description">
+              </mat-form-field>
+            </td>
+          </tr>
+  
+          <tr>
+            <td>
+              <mat-form-field class="demo-full-width">
+                <mat-select class="form-group" formControlName="status" placeholder="Select Status">
+                    <mat-option>-- Select Any Status --</mat-option>
+                  <mat-option *ngFor="let status of statusList" [value]="status.id">{{status.text}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+              <td>
+                  <mat-form-field class="demo-full-width">
+                    <mat-select class="form-group" formControlName="team" placeholder="Select Team" (selectionChange)="onTeamSelect($event.source.value)">
+                      <mat-option>-- Select Any Team --</mat-option>
+                      <mat-option *ngFor="let team of teams" [value]="team.id">{{team.name}}</mat-option>
+                    </mat-select>                
+                  </mat-form-field>
+                  <!-- <div class="demo-full-width">
+                      <select class="form-group" formControlName="team" #team placeholder="Select Team" (change)="onTeamSelect($event.target.value)">
+                        <option>-- Select Any Team --</option>
+                        <option *ngFor="let team of teams" [value]="team.id">{{team.name}}</option>
+                      </select>                
+                    </div> -->
+              </td>
+            </tr>
+
+          <tr>
+            <td>
+                  <mat-form-field class="demo-full-width">
+                    <mat-select class="form-group" formControlName="assigned_to" placeholder="Select Member">
+                      <mat-option>-- Select Any Member --</mat-option>
+                      <mat-option *ngFor="let user of userList" [value]="user.id">{{user.full_name}}</mat-option>
+                    </mat-select>                
+                  </mat-form-field>
+            </td>
+          </tr>
+          
+          <tr>
+            <td colspan="2">
+              <mat-form-field  class="demo-full-width">
+                  <input matInput [matDatepicker]="picker" type="text" class="form-control" id="deadline" name="deadline" placeholder="deadline" formControlName="deadline">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker touchUi="true" #picker></mat-datepicker>            
+                </mat-form-field>
+            </td>
+          </tr>
+  
+      </table>
+      <button [disabled]="!addTaskForm.valid" type="submit" mat-raised-button color="accent">Submit</button>
+    </form>
+  </mat-card-content>
+</mat-card>

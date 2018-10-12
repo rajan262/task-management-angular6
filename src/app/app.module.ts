@@ -1,8 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule, MatTableModule, MatPaginatorModule, MatSortModule} from '@angular/material';
+import {
+  MatButtonModule, MatCheckboxModule, MatToolbarModule, MatSidenavModule, 
+  MatIconModule, MatListModule, MatGridListModule, MatCardModule, MatMenuModule,
+  MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule,
+  MatDatepickerModule, MatNativeDateModule, MatInputModule, MatRadioModule,
+  MatOptionModule, MatSelectModule, MatSlideToggleModule, MatProgressSpinnerModule 
+} from '@angular/material';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 import { routing } from './app.route';
@@ -17,11 +24,11 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
 import { DateTransformPipe } from './date-transform.pipe';
 import { StatusTransformPipe } from './status-transform.pipe';
 import { TaskCountPipe } from './task-count.pipe';
-import { TaskNavComponent } from './task-nav/task-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { TaskDashboardComponent } from './task-dashboard/task-dashboard.component';
 import { TaskTableComponent } from './task-table/task-table.component';
 import { TaskToolbarComponent } from './task-toolbar/task-toolbar.component';
+import { AddTeamComponent } from './add-team/add-team.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +43,10 @@ import { TaskToolbarComponent } from './task-toolbar/task-toolbar.component';
     DateTransformPipe,
     StatusTransformPipe,
     TaskCountPipe,
-    TaskNavComponent,
     TaskDashboardComponent,
     TaskTableComponent,
-    TaskToolbarComponent
+    TaskToolbarComponent,
+    AddTeamComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +54,7 @@ import { TaskToolbarComponent } from './task-toolbar/task-toolbar.component';
     MatButtonModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     routing,
     LayoutModule,
@@ -59,7 +67,16 @@ import { TaskToolbarComponent } from './task-toolbar/task-toolbar.component';
     MatMenuModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatSlideToggleModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

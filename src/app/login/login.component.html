@@ -1,21 +1,24 @@
-<div class="container">
-  <h1 class="form-heading">login Form</h1>
-  <div class="login-form">
-    <div class="main-div">
-        <div class="panel">
-          <p>Please enter your email and password</p>
-        </div>
-        <form id="Login" [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
-    
-            <div class="form-group"> 
-                <input type="email" class="form-control" formControlName="email" id="email" placeholder="Email Address" name="email">  
-            </div>  
-            <div class="form-group">  
-                <input type="password" class="form-control" formControlName="password" id="password" placeholder="Password" name="password">  
-            </div>
-            <button type="submit" class="btn btn-primary">Login</button>
-    
+<mat-card>
+    <mat-card-title>Login Form</mat-card-title>
+    <mat-card-content>
+        <form id="loginForm" [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+            <table>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input type="email" matInput formControlName="email" id="email" name="email" placeholder="Email Address">
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-form-field class="demo-full-width">
+                            <input type="password" matInput formControlName="password" placeholder="Password" name="password" id="password">
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+            <button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary" mat-raised-button color="accent">Login</button>
         </form>
-    </div>
-  </div>
-</div>
+    </mat-card-content>
+</mat-card>

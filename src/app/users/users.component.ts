@@ -15,6 +15,8 @@ import { Subscriber } from 'rxjs';
 export class UsersComponent implements OnInit {
   tasks: Task[];
   user_id: string;
+  displayedColumns: string[] = ["team", "assigned_to", "name", "description", "status", "deadline", "created", "edit"]
+
   constructor(private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {

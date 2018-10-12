@@ -4,23 +4,16 @@
     <span class="example-fill-remaining-space"></span>
     <span class="align-center"></span>
     <span class="example-spacer"></span>
-    <button mat-button>About</button>
-    <button mat-button>Contact</button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button *ngIf="adminUser == 'True'" mat-button (click)="addTeam()">Add a Team</button>
+    <button *ngIf="adminUser == 'True'" [@changeState]="currentState" mat-button (click)="addTask()">Add a Task</button>
+    <button *ngIf="adminUser == 'True'" mat-button (click)="getTaskStatistics()">Check Task Statistics</button>
+    <button *ngIf="logged == 'True'" mat-icon-button [matMenuTriggerFor]="menu">
   <mat-icon>more_vert</mat-icon>
 </button>
 <mat-menu #menu="matMenu">
-  <button mat-menu-item>
-    <mat-icon>dialpad</mat-icon>
-    <span>Redial</span>
-  </button>
-  <button mat-menu-item disabled>
-    <mat-icon>voicemail</mat-icon>
-    <span>Check voicemail</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
+  <button *ngIf="logged == 'True'" mat-menu-item (click)="logout()">
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Logout</span>
   </button>
 </mat-menu>
  </mat-toolbar-row>

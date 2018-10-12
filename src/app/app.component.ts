@@ -10,19 +10,19 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit{
   title = 'Task Management';
-  // subscription: Subscription;
+  subscription: Subscription;
   logged: string = localStorage.getItem('logged')?localStorage.getItem('logged'):"False";
   adminUser: string = localStorage.getItem('adminUser')?localStorage.getItem('adminUser'):"False";
   
   constructor(private router: Router, private messageService: MessageService) { 
-    // this.subscription = this.messageService.getLocalStorage().subscribe(localData => {
-    //   this.logged = localData.logged;
-    //   this.adminUser = localData.adminUser;
-    // })
-  
+      
   }
 
   ngOnInit() {
+    this.messageService.getLocalStorage().subscribe(localData => {
+      this.logged = localData.logged;
+      this.adminUser = localData.adminUser;
+    })
     if (this.logged == "True") {
       if(this.adminUser == "True") {
         this.router.navigate(['admin']);
@@ -35,13 +35,13 @@ export class AppComponent implements OnInit{
       this.router.navigate(['login']);
     }
   }
-  logout() {
-    console.log('Logging out');
-    localStorage.setItem('logged', "False");
-    this.logged = "False";
-    this.router.navigate(['']);
+  // logout() {
+  //   console.log('Logging out');
+  //   localStorage.setItem('logged', "False");
+  //   this.logged = "False";
+  //   this.router.navigate(['']);
    
-  }
+  // }
 
 }
   

@@ -15,12 +15,7 @@ import { Subscriber } from 'rxjs';
 })
 export class AdminComponent implements OnInit {
   tasks: Task[];
-  // assigned_to = models.ForeignKey(get_user_model(), blank=True, null=True, related_name='task_user')
-  //   name = models.CharField(max_length=100)
-  //   description = models.TextField(max_length=1000)
-  //   status = models.PositiveSmallIntegerField(choices=STATUS_CHOICES, default=0)
-  //   deadline = models.DateField()
-  //   created = models.DateTimeField(auto_now_add=True)
+  displayedColumns: string[] = ["team", "assigned_to", "name", "description", "status", "deadline", "created", "delete", "edit"]
   constructor(private formBuilder: FormBuilder, private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {

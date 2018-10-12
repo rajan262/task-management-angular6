@@ -6,6 +6,7 @@ import { TaskService } from '../task.service';
 import { AuthService } from '../auth.service';
 import { Task } from '../task.model';
 import { User } from '../user.model';
+import { Team } from '../team.model';
 
 @Component({
   selector: 'app-add-task',
@@ -15,6 +16,7 @@ import { User } from '../user.model';
 export class AddTaskComponent implements OnInit {
   addTaskForm: FormGroup;
   userList: User[];
+  teams: Team[];
   statusList = [
     {id: 0, text: 'To Do'},
   ]
@@ -24,17 +26,28 @@ export class AddTaskComponent implements OnInit {
   ngOnInit() {
     this.addTaskForm = this.formBuilder.group({
       'name': ['', Validators.required],
+      'team': ['', Validators.required],
       'assigned_to': ['', Validators.required],
       'description': [''],
       'status': ['', Validators.required],
       'deadline': ['', Validators.required],
     })
+
     this.authService.listUsers().subscribe((users:User[]) => {
       this.userList = users;
     });
+
+    this.taskService.listTeams().subscribe((teams: Team[]) => {
+      this.teams = teams;
+    })
+
     this.addTaskForm.patchValue({
       'status': this.statusList[0].id
     });
+  }
+
+  onTeamSelect(teamId: number) {
+    this.userList = this.teams.filter(Team => Team.id==teamId)[0].members;
   }
 
   onAddTaskSubmit() {

@@ -1,27 +1,40 @@
-<div class="container">
-    <table id="myTable" class=" table order-list">
-    <thead>
-        <tr>
-            <td style="display:none;">id</td>
-            <td>Assigned To</td>
-            <td>Task Name</td>
-            <td>Description</td>
-            <td>status</td>
-            <td>Deadline</td>
-            <td>Created</td>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let task of tasks">
-            <td class="col-md-1" style="display:none;">{{task.id}}</td>
-            <td class="col-md-1">{{task.assigned_to.full_name}}</td>
-            <td class="col-md-1">{{task.name}}</td>
-            <td class="col-md-1">{{task.description}}</td>
-            <td class="col-md-1">{{task.status | statusTransform}}</td>
-            <td class="col-md-1">{{task.deadline}}</td>
-            <td class="col-md-1">{{task.created | dateTransform}}</td>
-            <td class="col-md-1"><button (click)="onUserEditTask(task.id)" appHighlight>Edit Task</button></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+<div>
+        <mat-table [dataSource]="tasks">
+          <ng-container matColumnDef="team">
+              <mat-header-cell *matHeaderCellDef> Team Name </mat-header-cell>
+              <mat-cell *matCellDef="let task"> {{task.team}} </mat-cell>
+            </ng-container>
+          <ng-container matColumnDef="assigned_to">
+            <mat-header-cell *matHeaderCellDef> Assigned To </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{task.assigned_to.full_name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{task.name}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{task.description}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let task"> {{task.status | statusTransform}} </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="deadline">
+                <mat-header-cell *matHeaderCellDef> Deadline </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.deadline }} </mat-cell>
+           </ng-container>
+           <ng-container matColumnDef="created">
+                <mat-header-cell *matHeaderCellDef> Created </mat-header-cell>
+                <mat-cell *matCellDef="let task"> {{task.created | dateTransform}} </mat-cell>
+           </ng-container>
+           <ng-container matColumnDef="edit">
+                <mat-header-cell *matHeaderCellDef> Edit Action </mat-header-cell>
+                <mat-cell *matCellDef="let task"><button (click)="onUserEditTask(task.id)" appHighlight>Edit Task</button></mat-cell>
+           </ng-container>
+
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+      </div>

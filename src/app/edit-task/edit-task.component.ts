@@ -6,6 +6,7 @@ import { TaskService } from '../task.service';
 import { AuthService } from '../auth.service';
 import { Task } from '../task.model';
 import { User } from '../user.model';
+import { Team } from '../team.model';
 
 @Component({
   selector: 'app-edit-task',
@@ -15,6 +16,7 @@ import { User } from '../user.model';
 export class EditTaskComponent implements OnInit {
   editTaskForm: FormGroup;
   userList: User[];
+  teams: Team[];
   adminUser: boolean = localStorage.getItem('adminUser') == "True"?true:false;
   // userList: User[];
   // userForm: FormGroup;
@@ -40,7 +42,7 @@ export class EditTaskComponent implements OnInit {
     this.editTaskForm = this.formBuilder.group({
       'id': [],
       'name': ['', Validators.required],
-      // 'assigned_to': [''],
+      'team': [{value: '', disabled: !this.adminUser}, Validators.required],
       'assigned_to': this.formBuilder.group({
         'id': ['', Validators.required],
         'email': [''],
@@ -48,7 +50,7 @@ export class EditTaskComponent implements OnInit {
       }),
       'description': [''],
       'status': ['', Validators.required],
-      'deadline': ['', Validators.required],
+      'deadline': [{value: '', disabled: !this.adminUser}, Validators.required],
       'created': ['']
     });
 
@@ -60,16 +62,25 @@ export class EditTaskComponent implements OnInit {
     let editTaskId = this.adminUser?localStorage.getItem('adminEditTaskId'):localStorage.getItem('userEditTaskId')
     this.taskService.retrieveDeleteTask(editTaskId, 'retrieve').subscribe((task:Task) => {
       this.editTaskForm.setValue(task);
+      console.log(task);
     })
 
     this.authService.listUsers().subscribe((users:User[]) => {
       this.userList = users;
     })
-  
+
+    this.taskService.listTeams().subscribe((teams: Team[]) => {
+      this.teams = teams;
+    });
+
   }
 
+  onTeamSelect(teamId: number) {
+    this.userList = this.teams.filter(Team => Team.id==teamId)[0].members;
+  }
+    
+
   adminEditTaskSubmit() {
-    console.log(this.editTaskForm.value);
     this.taskService.updateTask(this.editTaskForm.value).subscribe();
     if (this.adminUser) {
     this.router.navigate(['admin']);
