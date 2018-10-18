@@ -56,6 +56,11 @@ export class AddTaskComponent implements OnInit {
   }
 
   onAddTaskSubmit() {
+    let deadline = new Date(this.addTaskForm.value.deadline)
+    this.addTaskForm.patchValue({
+      'deadline': deadline.getFullYear() + '-' + deadline.getMonth() + '-' + deadline.getDate()
+    })  ;
+    console.log(this.addTaskForm.value);
     this.taskService.createTask(this.addTaskForm.value).subscribe();
     this.router.navigate(['admin']);
   }
